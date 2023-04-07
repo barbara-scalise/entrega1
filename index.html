@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cotizador de seguros</title>
+  </head>
+  <body>
+    <h1>Cotizador de seguros</h1>
+
+    <p>Ingrese los datos del seguro:</p>
+
+    <form id="insurance-form">
+      <label for="car-value">Valor del vehiculo:</label>
+      <input type="number" id="car-value" name="car-value" required />
+
+      <label for="car-type">Tipo de vehiculo:</label>
+      <select id="car-type" name="car-type">
+        <option value="compacto">Compacto</option>
+        <option value="sedán">Familiar</option>
+        <option value="camioneta">Camioneta</option>
+      </select>
+
+      <label for="driver-age">Edad del conductor:</label>
+      <input type="number" id="driver-age" name="driver-age" required />
+
+      <button type="submit">Cotizar seguro</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+      // Obtener el formulario y el elemento de resultado
+      const form = document.getElementById("insurance-form");
+      const result = document.getElementById("result");
+
+      // Definir las tarifas de seguro
+      const rates = {
+        compacto: {
+          18: 1500,
+          25: 1000,
+          70: 2000,
+        },
+        familiar: {
+          18: 2000,
+          25: 1500,
+          70: 2500,
+        },
+        camioneta: {
+          18: 2500,
+          25: 2000,
+          70: 3000,
+        },
+      };
+
+      // Procesar el envío del formulario
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // Obtener los valores del formulario
+        const carValue = Number(document.getElementById("car-value").value);
+        const carType = document.getElementById("car-type").value;
+        const driverAge = Number(document.getElementById("driver-age").value);
+
+        // Calcular la tarifa del seguro
+        let rate = 0;
+
+        if (driverAge >= 18 && driverAge < 25) {
+          rate = rates[carType][25];
+        } else if (driverAge >= 25 && driverAge < 70) {
+          rate = rates[carType][driverAge];
+        } else if (driverAge >= 70) {
+          rate = rates[carType][70];
+        }
+
+        const premium = Math.round((carValue * rate) / 1000);
+
+        // Mostrar el resultado al usuario
+        result.innerHTML = `<p>La tarifa del seguro es del ${rate}%.</p><p>El costo del seguro es de $${premium}.</p>`;
+      });
+    </script>
+  </body>
+</html>
