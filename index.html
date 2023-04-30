@@ -76,6 +76,50 @@
         // Mostrar el resultado al usuario
         result.innerHTML = `<p>La tarifa del seguro es del ${rate}%.</p><p>El costo del seguro es de $${premium}.</p>`;
       });
+
+      // Define los precios base de los seguros
+      const seguroAutoBase = 500;
+      const seguroCasaBase = 1000;
+      const seguroSaludBase = 750;
+
+      // Crea un array con los tipos de seguro disponibles
+      const tiposDeSeguro = ["auto", "casa", "salud"];
+
+      // Pide al usuario que seleccione un tipo de seguro
+      const tipoSeleccionado = prompt(
+        "Que tipo de seguro deseas cotizar? (auto, casa, salud)"
+      );
+
+      // Verifica que el tipo de seguro seleccionado sea válido
+      if (!tiposDeSeguro.includes(tipoSeleccionado)) {
+        alert("El tipo de seguro seleccionado no es valido.");
+      } else {
+        // Pide al usuario que ingrese la cantidad de cobertura deseada
+        const cobertura = parseInt(
+          prompt("Cuanta cobertura deseas contratar?")
+        );
+
+        // Calcula el precio total del seguro seleccionado
+        let precioTotal;
+        switch (tipoSeleccionado) {
+          case "auto":
+            precioTotal = seguroAutoBase + cobertura * 5;
+            break;
+          case "casa":
+            precioTotal = seguroCasaBase + cobertura * 10;
+            break;
+          case "salud":
+            precioTotal = seguroSaludBase + cobertura * 7.5;
+            break;
+          default:
+            precioTotal = 0;
+        }
+
+        // Muestra el precio total al usuario
+        alert(
+          `El precio total del seguro de ${tipoSeleccionado} con ${cobertura} de cobertura es de $${precioTotal}.`
+        );
+      }
     </script>
   </body>
 </html>
