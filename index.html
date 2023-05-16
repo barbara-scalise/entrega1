@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="css/style.css" />
     <title>Cotizador de seguros</title>
   </head>
-  <body>
-    <h1>Cotizador de seguros</h1>
+  <body class="body-index">
+    <caja>
+    <center><h1>Cotizador de seguros</h1></center>
+    <section id="image-index"></section>
+    <div><img src="../image/camionetas-4x4-jpg" alt="" /></div>
 
-    <p>Ingrese los datos del seguro:</p>
+    <div class="datos">
+      
+        <p>Ingrese los datos del seguro:</p>
 
-    <form id="insurance-form">
-      <label for="car-value">Valor del vehiculo:</label>
-      <input type="number" id="car-value" name="car-value" required />
+        <form id="insurance-form">
+          <label for="car-value">Valor del vehiculo:</label>
+          <input type="number" id="car-value" name="car-value" required />
 
-      <label for="car-type">Tipo de vehiculo:</label>
-      <select id="car-type" name="car-type">
-        <option value="compacto">Compacto</option>
-        <option value="sedán">Familiar</option>
-        <option value="camioneta">Camioneta</option>
-      </select>
+          <label for="car-type">Tipo de vehiculo:</label>
+          <select id="car-type" name="car-type">
+            <option value="compacto">Compacto</option>
+            <option value="sedán">Familiar</option>
+            <option value="camioneta">Camioneta</option>
+          </select>
 
-      <label for="driver-age">Edad del conductor:</label>
-      <input type="number" id="driver-age" name="driver-age" required />
+          <label for="driver-age">Edad del conductor:</label>
+          <input type="number" id="driver-age" name="driver-age" required />
 
-      <button type="submit">Cotizar seguro</button>
-    </form>
+          <button type="submit">Cotizar seguro</button>
+        </form>
+      </caja>
+    </div>
 
     <div id="result"></div>
 
@@ -75,7 +83,23 @@
 
         // Mostrar el resultado al usuario
         result.innerHTML = `<p>La tarifa del seguro es del ${rate}%.</p><p>El costo del seguro es de $${premium}.</p>`;
+
+        const resultObj = {
+          carValue,
+          carType,
+          driverAge,
+          rate,
+          premium,
+        };
+
+        localStorage.setItem("insuranceResult", JSON.stringify(resultObj));
       });
+
+      const storedResult = localStorage.getItem("insuranceResult");
+      if (storedResult) {
+        const resultObj = JSON.parse(storedResult);
+        result.innerHTML = `<p>La tarifa del seguro es del ${resultObj.rate}%.</p><p>El costo del seguro es de $${resultObj.premium}.</p`;
+      }
 
       // Define los precios base de los seguros
       const seguroAutoBase = 500;
