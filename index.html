@@ -3,8 +3,11 @@
   <head>
     <link rel="stylesheet" href="css/style.css" />
     <title>Cotizador de seguros</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><!-- CDN de sweet alert -->
   </head>
   <body class="body-index">
+    <button id="tituloBtn">Cotizador de Seguros</button>
+
     <caja>
     <center><h1>Cotizador de seguros</h1></center>
     <section id="image-index"></section>
@@ -35,7 +38,10 @@
 
     <div id="result"></div>
 
+    
     <script>
+      document.getElementById("tituloBtn").addEventListener("click",alertT)
+      function alertT(){swal ("Good job!", "You clicked the button!", "success");}
       // Obtener el formulario y el elemento de resultado
       const form = document.getElementById("insurance-form");
       const result = document.getElementById("result");
