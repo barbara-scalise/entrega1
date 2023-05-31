@@ -37,9 +37,11 @@
     </div>
 
     <div id="result"></div>
-
+    <button id="fetch"></button>
+    <div id="Respuesta"></div>
     
     <script>
+      document.getElementById("fetch").addEventListener("click", fetch)
       document.getElementById("tituloBtn").addEventListener("click",alertT)
       function alertT(){swal ("Good job!", "You clicked the button!", "success");}
       // Obtener el formulario y el elemento de resultado
